@@ -1,0 +1,14 @@
+
+[unstable]
+# build-std allows rust to recompile the core library and its dependencies to the new target
+build-std = ["core", "compiler_builtins"]
+# this flag enables rust to use its own implementation of memory manipulation functions such as memcpy, memset, etc.
+# this is required because the libc crate uses the host's implementation of these functions, which may not be available on the target
+build-std-features = ["compiler-builtins-mem"]
+
+
+[build]
+target = "data/rust_target.json"
+
+[target.'cfg(target_os = "none")']
+runner = "bootimage runner"

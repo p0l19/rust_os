@@ -5,4 +5,17 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+# Because stack unwinding is implemented in the standard library, which is not used in this os and to develope a new method for it would be too much work, it is disabled.
+# Stack unwinding is a technic used to handle the  memory addresses to which funtions return control to after running.
+# Also, it is used to handle errors and the cleanup of variables on the stack when the programm panics.
+# panic = abort tells the compiler to abort the programm when it panics.
+[profile.release]
+panic = "abort"
+[profile.dev]
+panic = "abort"
+
 [dependencies]
+#The bootloader crate is used to create a bootable disk image. Which is at the moment a bit of magic for me
+bootloader = "0.9.23"
+volatile = "0.2.6"
+
